@@ -1,0 +1,38 @@
+#------------------------------------------------------------------------
+# Gemfile
+#------------------------------------------------------------------------
+source 'http://rubygems.org'
+source 'https://rails-assets.org'
+
+gem 'rake'
+gem 'middleman'
+gem 'middleman-livereload'
+gem 'middleman-google-analytics'
+gem 'middleman-title'
+gem 'middleman-search_engine_sitemap'
+gem 'middleman-spellcheck'
+
+
+
+#------------------------------------------------------------------------
+# Bootstrap and jQuery
+
+# prefer rails-assets-* for bower assets, but bootstrap-sass is still a bit messed up in local paths, so work around it.
+
+# this also depends on jquery, but we still need to require it in the application.js
+# problems using this like: https://github.com/twbs/bootstrap-sass/issues/592#issuecomment-49757208
+#gem 'rails-assets-bootstrap-sass-official'
+
+# this requires us to explicitly require jquery
+gem 'bootstrap-sass'
+gem 'rails-assets-jquery'
+
+
+#------------------------------------------------------------------------
+# Deployment - requires additional configuration.  See links below
+gem 'middleman-aws'         # https://github.com/alienfast/middleman-aws
+gem 'middleman-s3_sync'     # https://github.com/fredjean/middleman-s3_sync
+gem 'middleman-cloudfront'  # https://github.com/andrusha/middleman-cloudfront
+
+#------------------------------------------------------------------------
+# Other dependencies below here.

@@ -73,6 +73,10 @@ See the available rake tasks below or run `rake -T`
     rake mm:publish      # One step clobber, build, deploy
     rake mm:show_config  # Show config
 
+# Real World Sample 
+If you are just getting started with middleman and want to get a quick jumpstart on your `Gemfile` and `congfig.rb`, 
+check out the source in the `samples` directory for a set of commonly used configurations/gems/extensions.
+
 ## Contributing
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
