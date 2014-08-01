@@ -3,7 +3,7 @@ middleman-aws
 
 Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and deploy to AWS using s3_sync and cloudfront invalidation.
 
-# Installation Cnd configuration
+# Installation and Configuration
 
 ### Step 1: Add this gem to the Gemfile
 
