@@ -1,11 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-require 'middleman-aws/version'
 
 Gem::Specification.new do |s|
   s.name        = 'middleman-aws'
-  s.version     = Middleman::AWS::VERSION
-  # s.platform    = Gem::Platform::RUBY
+  s.version     = '0.0.4'
+  s.platform    = Gem::Platform::RUBY
 
   s.authors = ['Kevin Ross']
   s.email = ['kevin.ross@alienfast.com']
