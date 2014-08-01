@@ -25,7 +25,8 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
 e.g. `~/.aws/acme.yml`
 
 This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside 
-outside the repository.  `acme` is equivalent to the directory name for your project.  Don't worry, validation will make sure you have it right.
+outside the repository.  `acme` is equivalent to the directory name for your project.  
+Don't worry, validation will make sure you have the path right.
 
     access_key_id: XXXXXX
     secret_access_key: XXXXXX
