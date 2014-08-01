@@ -3,21 +3,17 @@ middleman-aws
 
 Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and deploy to AWS using s3_sync and cloudfront invalidation.
 
-# Installation
+# Installation Cnd configuration
 
-## Step 1: Require this gem
-In the `Gemfile`:
+### Step 1: Add this gem to the Gemfile
 
     gem 'middleman-aws'
 
-## Step 2: Require this gem
-In the `Rakefile`:
+### Step 2: Require this gem in the Rakefile
 
     require 'middleman-aws'
 
-# Configuration
-
-## Step 1: Add your aws credentials
+### Step 3: Add your aws credentials
 e.g. `~/.aws/acme.yml`
 
 This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside 
@@ -26,7 +22,7 @@ outside the repository.  `acme` is equivalent to the directory name for your pro
     access_key_id: XXXXXX
     secret_access_key: XXXXXX
 
-## Step 2: Add the necessary s3_sync and Cloudfront sections to your config
+### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
 This is a sample of how a common config is setup with variables extracted:
 
     # Configuration variables specific to each project
