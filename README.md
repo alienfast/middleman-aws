@@ -5,15 +5,21 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
 
 # Installation
 
-## Step 1: Require this gem in the `Gemfile`:
+## Step 1: Require this gem
+In the `Gemfile`:
+
     gem 'middleman-aws'
 
-## Step 2: Require this gem in the `Rakefile`:
-    gem 'middleman-aws'
+## Step 2: Require this gem
+In the `Rakefile`:
+
+    require 'middleman-aws'
 
 # Configuration
 
-## Step 1: Add your aws credentials e.g. ~/.aws/acme.yml
+## Step 1: Add your aws credentials
+e.g. `~/.aws/acme.yml`
+
 This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside 
 outside the repository.  `acme` is equivalent to the directory name for your project.  Don't worry, validation will make sure you have it right.
 
