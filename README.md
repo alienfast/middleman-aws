@@ -33,6 +33,8 @@ access_key_id: XXXXXX
 secret_access_key: XXXXXX
 ```
 
+If you don't create config file, then environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` will be used. If there are no such variables, then request to AWS will fail (unless middleman-aws is used on EC2 instance with correct IAM role, then AWS will take care of authorising requests).
+
 ### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
 This is a sample of how a common config is setup with variables extracted:
 
