@@ -21,34 +21,49 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
     gem 'middleman-cloudfront'
 
 
-### Step 3: Add the necessary s3_sync and Cloudfront sections to your config
+### Step 3: Add your aws credentials
+e.g. `~/.aws/acme.yml`
+
+This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside
+outside the repository.  `acme` is equivalent to the directory name for your project.
+Don't worry, validation will make sure you have the path right.
+
+```ruby
+access_key_id: XXXXXX
+secret_access_key: XXXXXX
+```
+
+
+### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
 This is a sample of how a common config is setup with variables extracted:
 
-    # Configuration variables specific to each project
-    #------------------------------------------------------------------------
-    AWS_BUCKET                      = 'acme.alienfast.com'
-    AWS_CLOUDFRONT_DISTRIBUTION_ID  = 'xxxxxx'
+```ruby
+# Configuration variables specific to each project
+#------------------------------------------------------------------------
+AWS_BUCKET                      = 'acme.alienfast.com'
+AWS_CLOUDFRONT_DISTRIBUTION_ID  = 'xxxxxx'
 
-    # Variables: Sent in on CLI by rake task via ENV
-    #------------------------------------------------------------------------
-    AWS_ACCESS_KEY                  = ENV['AWS_ACCESS_KEY']
-    AWS_SECRET                      = ENV['AWS_SECRET']
+# Variables: Sent in on CLI by rake task via ENV
+#------------------------------------------------------------------------
+AWS_ACCESS_KEY                  = ENV['AWS_ACCESS_KEY']
+AWS_SECRET                      = ENV['AWS_SECRET']
 
-    # https://github.com/fredjean/middleman-s3_sync
-    activate :s3_sync do |s3_sync|
-      s3_sync.bucket                     = AWS_BUCKET # The name of the S3 bucket you are targeting. This is globally unique.
-      s3_sync.aws_access_key_id          = AWS_ACCESS_KEY
-      s3_sync.aws_secret_access_key      = AWS_SECRET
-      s3_sync.delete                     = false # We delete stray files by default.
-    end
+# https://github.com/fredjean/middleman-s3_sync
+activate :s3_sync do |s3_sync|
+  s3_sync.bucket                     = AWS_BUCKET # The name of the S3 bucket you are targeting. This is globally unique.
+  s3_sync.aws_access_key_id          = AWS_ACCESS_KEY
+  s3_sync.aws_secret_access_key      = AWS_SECRET
+  s3_sync.delete                     = false # We delete stray files by default.
+end
 
-    # https://github.com/andrusha/middleman-cloudfront
-    activate :cloudfront do |cf|
-      cf.access_key_id                    = AWS_ACCESS_KEY
-      cf.secret_access_key                = AWS_SECRET
-      cf.distribution_id                  = AWS_CLOUDFRONT_DISTRIBUTION_ID
-      # cf.filter = /\.html$/i
-    end
+# https://github.com/andrusha/middleman-cloudfront
+activate :cloudfront do |cf|
+  cf.access_key_id                    = AWS_ACCESS_KEY
+  cf.secret_access_key                = AWS_SECRET
+  cf.distribution_id                  = AWS_CLOUDFRONT_DISTRIBUTION_ID
+  # cf.filter = /\.html$/i
+end
+```
 
 # Usage
 Run the desired rake task.  It's as simple as `rake mm:publish` in one step, or you can choose to do things one step at a time.
