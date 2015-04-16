@@ -12,26 +12,28 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
 ### Step 2: Require this gem in the Rakefile
 
     require 'middleman-aws'
-    
-    # Even though already required by the middleman-aws gem, it appears middleman does not 
-    #   pick up transitive dependency extensions early enough  to avoid the 
-    #   "== Unknown Extension:" error.  Add these to your main project 
+
+    # Even though already required by the middleman-aws gem, it appears middleman does not
+    #   pick up transitive dependency extensions early enough  to avoid the
+    #   "== Unknown Extension:" error.  Add these to your main project
     #   (I wish this was unnecessary but don't know how to work around it)
-    gem 'middleman-s3_sync'     
+    gem 'middleman-s3_sync'
     gem 'middleman-cloudfront'
 
 
 ### Step 3: Add your aws credentials
 e.g. `~/.aws/acme.yml`
 
-This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside 
-outside the repository.  `acme` is equivalent to the directory name for your project.  
+This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside
+outside the repository.  `acme` is equivalent to the directory name for your project.
 Don't worry, validation will make sure you have the path right.
 
 ```ruby
 access_key_id: XXXXXX
 secret_access_key: XXXXXX
 ```
+
+If you don't create config file, then environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` will be used. If there are no such variables, then request to AWS will fail (unless middleman-aws is used on EC2 instance with correct IAM role, then AWS will take care of authorising requests).
 
 ### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
 This is a sample of how a common config is setup with variables extracted:
@@ -65,7 +67,7 @@ end
 ```
 
 # Usage
-Run the desired rake task.  It's as simple as `rake mm:publish` in one step, or you can choose to do things one step at a time.  
+Run the desired rake task.  It's as simple as `rake mm:publish` in one step, or you can choose to do things one step at a time.
 See the available rake tasks below or run `rake -T`
 
 # Available Rake Tasks
@@ -77,8 +79,8 @@ See the available rake tasks below or run `rake -T`
     rake mm:publish      # One step clobber, build, deploy
     rake mm:show_config  # Show config
 
-# Real World Sample 
-If you are just getting started with middleman and want to get a quick jumpstart on your `Gemfile` and `congfig.rb`, 
+# Real World Sample
+If you are just getting started with middleman and want to get a quick jumpstart on your `Gemfile` and `congfig.rb`,
 check out the source in the `samples` directory for a set of commonly used configurations/gems/extensions.
 
 ## Contributing
