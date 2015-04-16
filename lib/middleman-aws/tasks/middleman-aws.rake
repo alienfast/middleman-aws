@@ -24,14 +24,10 @@ namespace :mm do
 
     puts '## Deploy starting...'
     cd 'build' do
-      # system 'git add .'
       system 'git add -u'
       message = "Site updated at #{Time.now}"
       puts "## Commiting: #{message}"
       system "git commit -m \"#{message}\""
-      # puts "## Pushing generated website"
-      # system "git push origin master"
-      # puts "## Github Pages deploy complete"
     end
 
     aws_env = "AWS_ACCESS_KEY=#{credentials[:access_key_id]} AWS_SECRET=#{credentials[:secret_access_key]}"
