@@ -21,11 +21,12 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
     gem 'middleman-cloudfront'
 
 
-### Step 3: Add your aws credentials
+### Step 3: AWS credentials
+
+#### Option 1 - secrets file
 e.g. `~/.aws/acme.yml`
 
-This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside
-outside the repository.  `acme` is equivalent to the directory name for your project.
+This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside outside the repository.  `acme` is equivalent to the directory name for your project.
 Don't worry, validation will make sure you have the path right.
 
 ```ruby
@@ -33,7 +34,11 @@ access_key_id: XXXXXX
 secret_access_key: XXXXXX
 ```
 
-If you don't create config file, then environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` will be used. If there are no such variables, then request to AWS will fail (unless middleman-aws is used on EC2 instance with correct IAM role, then AWS will take care of authorising requests).
+#### Option 2 - ENV variables
+If you don't create secrets file, then environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` will be used. 
+
+### Option 3 - IAM
+If a secrets file is not present (option 1), there are no ENV variables (option 2), then request to AWS will fail (unless middleman-aws is used on EC2 instance with correct IAM role, then AWS will take care of authorising requests).
 
 ### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
 This is a sample of how a common config is setup with variables extracted:
