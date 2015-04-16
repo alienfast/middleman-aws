@@ -12,26 +12,16 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
 ### Step 2: Require this gem in the Rakefile
 
     require 'middleman-aws'
-    
-    # Even though already required by the middleman-aws gem, it appears middleman does not 
-    #   pick up transitive dependency extensions early enough  to avoid the 
-    #   "== Unknown Extension:" error.  Add these to your main project 
+
+    # Even though already required by the middleman-aws gem, it appears middleman does not
+    #   pick up transitive dependency extensions early enough  to avoid the
+    #   "== Unknown Extension:" error.  Add these to your main project
     #   (I wish this was unnecessary but don't know how to work around it)
-    gem 'middleman-s3_sync'     
+    gem 'middleman-s3_sync'
     gem 'middleman-cloudfront'
 
 
-### Step 3: Add your aws credentials
-e.g. `~/.aws/acme.yml`
-
-This should contain the access and secret keys generated from the selected IAM user.  This is the only file that will need to reside 
-outside the repository.  `acme` is equivalent to the directory name for your project.  
-Don't worry, validation will make sure you have the path right.
-
-    access_key_id: XXXXXX
-    secret_access_key: XXXXXX
-
-### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
+### Step 3: Add the necessary s3_sync and Cloudfront sections to your config
 This is a sample of how a common config is setup with variables extracted:
 
     # Configuration variables specific to each project
@@ -43,7 +33,7 @@ This is a sample of how a common config is setup with variables extracted:
     #------------------------------------------------------------------------
     AWS_ACCESS_KEY                  = ENV['AWS_ACCESS_KEY']
     AWS_SECRET                      = ENV['AWS_SECRET']
-    
+
     # https://github.com/fredjean/middleman-s3_sync
     activate :s3_sync do |s3_sync|
       s3_sync.bucket                     = AWS_BUCKET # The name of the S3 bucket you are targeting. This is globally unique.
@@ -51,7 +41,7 @@ This is a sample of how a common config is setup with variables extracted:
       s3_sync.aws_secret_access_key      = AWS_SECRET
       s3_sync.delete                     = false # We delete stray files by default.
     end
-    
+
     # https://github.com/andrusha/middleman-cloudfront
     activate :cloudfront do |cf|
       cf.access_key_id                    = AWS_ACCESS_KEY
@@ -61,7 +51,7 @@ This is a sample of how a common config is setup with variables extracted:
     end
 
 # Usage
-Run the desired rake task.  It's as simple as `rake mm:publish` in one step, or you can choose to do things one step at a time.  
+Run the desired rake task.  It's as simple as `rake mm:publish` in one step, or you can choose to do things one step at a time.
 See the available rake tasks below or run `rake -T`
 
 # Available Rake Tasks
@@ -73,8 +63,8 @@ See the available rake tasks below or run `rake -T`
     rake mm:publish      # One step clobber, build, deploy
     rake mm:show_config  # Show config
 
-# Real World Sample 
-If you are just getting started with middleman and want to get a quick jumpstart on your `Gemfile` and `congfig.rb`, 
+# Real World Sample
+If you are just getting started with middleman and want to get a quick jumpstart on your `Gemfile` and `congfig.rb`,
 check out the source in the `samples` directory for a set of commonly used configurations/gems/extensions.
 
 ## Contributing
