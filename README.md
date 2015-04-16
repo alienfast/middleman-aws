@@ -33,7 +33,6 @@ access_key_id: XXXXXX
 secret_access_key: XXXXXX
 ```
 
-
 ### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
 This is a sample of how a common config is setup with variables extracted:
 
