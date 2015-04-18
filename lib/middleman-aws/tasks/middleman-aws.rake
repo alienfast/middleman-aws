@@ -72,7 +72,7 @@ namespace :mm do
     secret_access_key = credentials.fetch('secret_access_key') { ENV['AWS_SECRET_ACCESS_KEY'] }
 
     {
-      access_key_id: access_key_id
+      access_key_id: access_key_id,
       secret_access_key: secret_access_key
     }
   end
