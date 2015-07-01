@@ -9,16 +9,16 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
 
     gem 'middleman-aws'
 
-### Step 2: Require this gem in the Rakefile
-
-    require 'middleman-aws'
-
     # Even though already required by the middleman-aws gem, it appears middleman does not
     #   pick up transitive dependency extensions early enough  to avoid the
     #   "== Unknown Extension:" error.  Add these to your main project
     #   (I wish this was unnecessary but don't know how to work around it)
     gem 'middleman-s3_sync'
     gem 'middleman-cloudfront'
+
+### Step 2: Require this gem in the Rakefile
+
+    require 'middleman-aws'
 
 
 ### Step 3: AWS credentials
