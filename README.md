@@ -79,4 +79,4 @@ check out the source in the `samples` directory.
 
 ## Copyright
 
-Copyright (c) 2016 AlienFast, LLC. See MIT LICENSE.txt for further details.
+Copyright (c) 2014-2016 AlienFast, LLC. See MIT LICENSE.txt for further details.
