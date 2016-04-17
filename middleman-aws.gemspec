@@ -3,7 +3,7 @@ $:.push File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'middleman-aws'
-  s.version     = '1.0.1'
+  s.version     = '4.0.0'
   s.platform    = Gem::Platform::RUBY
 
   s.authors = ['Kevin Ross']
@@ -23,10 +23,10 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   
   # The version of middleman-core your extension depends on
-  # s.add_runtime_dependency 'middleman-core', ['>= 3.3.3']
+  s.add_runtime_dependency 'middleman-core', ['>= 4.0.0']
 
-  s.add_dependency 'middleman-s3_sync'     # https://github.com/fredjean/middleman-s3_sync
-  s.add_dependency 'middleman-cloudfront'  # https://github.com/andrusha/middleman-cloudfront
+  s.add_dependency 'middleman-s3_sync', '>=4.0.0'     # https://github.com/fredjean/middleman-s3_sync
+  # s.add_dependency 'middleman-cloudfront', '>=4.0.0'  # https://github.com/andrusha/middleman-cloudfront
 
   s.add_dependency 'rake'
 end

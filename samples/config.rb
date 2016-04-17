@@ -1,17 +1,36 @@
 #------------------------------------------------------------------------
-# config.rb
+# Typical custom configuration each project
 #------------------------------------------------------------------------
 
+# Build config
+configure :build do
+  # activate :minify_css
+  # activate :minify_javascript
+  # activate :asset_hash
+end
+
+# activate :external_pipeline,
+#          name: :gulp,
+#          command: build? ? './node_modules/gulp/bin/gulp.js' : './node_modules/gulp/bin/gulp.js default:watch',
+#          source: 'dist'
+
+# Custom helpers
+# helpers do
+#   def body_classes
+#     "#{page_classes} #{data.page.bodyClasses}"
+#   end
+# end
+
+#------------------------------------------------------------------------
 # Configuration variables specific to each project
 #------------------------------------------------------------------------
 SITE_NAME                       = 'AlienFast Acme'
 URL_ROOT                        = 'http://acme.alienfast.com'
 AWS_BUCKET                      = 'acme.alienfast.com'
 AWS_CLOUDFRONT_DISTRIBUTION_ID  = 'xxxxxxxxxxxx'
-GOOGLE_ANALYTICS_ID             = 'UA-XXXXXXX-X'
 
 
-
+#------------------------------------------------------------------------
 # Common configuration below here, should not need to be changed.
 #------------------------------------------------------------------------
 
@@ -21,39 +40,31 @@ GOOGLE_ANALYTICS_ID             = 'UA-XXXXXXX-X'
 AWS_ACCESS_KEY                  = ENV['AWS_ACCESS_KEY']
 AWS_SECRET                      = ENV['AWS_SECRET']
 
-# LiveReload and pretty URLs
-activate :livereload
-activate :directory_indexes
-
-# Use relative paths
-activate :relative_assets
-set :relative_links, true
-
 # Default layout
 page '/*', layout: 'application'
 
-# Asset paths
-set :css_dir, 'stylesheets'
-set :js_dir, 'javascripts'
-set :images_dir, 'images'
+# With no layout
+page '/*.xml', layout: false
+page '/*.json', layout: false
+page '/*.txt', layout: false
+
+# Reload the browser automatically whenever files change
+configure :development do
+  activate :livereload, ignore: [ /.idea\// ]
+end
+
+activate :directory_indexes
+
+# # Use relative paths
+# activate :relative_assets
+# set :relative_links, true
 
 # Haml config
 set :haml, { :attr_wrapper => '"' }
 
-# Ignore files (e.g. keeps livereload from watching these)
-config[:file_watcher_ignore] += [ /.idea\// ]
-
-# https://github.com/jcypret/middleman-title
-activate :title, site: SITE_NAME, separator: ' | '
-
 # https://github.com/Aupajo/middleman-search_engine_sitemap
 set :url_root, URL_ROOT
 activate :search_engine_sitemap
-
-# https://github.com/danielbayerlein/middleman-google-analytics
-activate :google_analytics do |ga|
-  ga.tracking_id = GOOGLE_ANALYTICS_ID # Replace with your property ID.
-end
 
 # https://github.com/fredjean/middleman-s3_sync
 activate :s3_sync do |s3_sync|
@@ -78,17 +89,4 @@ activate :cloudfront do |cf|
   cf.secret_access_key                = AWS_SECRET
   cf.distribution_id                  = AWS_CLOUDFRONT_DISTRIBUTION_ID
   # cf.filter = /\.html$/i
-end
-
-# Build config
-configure :build do
-  activate :minify_css
-  activate :minify_javascript
-  activate :asset_hash
-end
-
-# Custom helpers
-helpers do
-
-
 end

@@ -42,10 +42,9 @@ namespace :mm do
   task :publish => [:clobber, :build, :deploy] do
   end
 
-
-  desc 'Run the preview server at http://localhost:4567'
-  task :preview do
-    system 'middleman server'
+  desc 'Serve the site'
+  task :serve do
+    system 'bundle exec middleman serve'
   end
 
   desc 'Show config'

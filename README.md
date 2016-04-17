@@ -5,21 +5,21 @@ Simple set of [middleman](http://middlemanapp.com/) rake tasks to build and depl
 
 # Installation and Configuration
 
-### Step 1: Add this gem to the Gemfile
+### Step 1: Add gems to the Gemfile
 
-    gem 'middleman-aws'
+See the [sample Gemfile](samples/Gemfile) for full configuration.
+
+```ruby
+gem 'middleman-aws', '>=4.0.0'
+gem 'middleman-s3_sync', '>=4.0.0'
+gem 'middleman-cloudfront',
+  #'>=4.0.0' waiting for release of PR https://github.com/andrusha/middleman-cloudfront/pull/23
+  github: 'rosskevin/middleman-cloudfront', branch: 'middleman-4'
+```
 
 ### Step 2: Require this gem in the Rakefile
 
     require 'middleman-aws'
-
-    # Even though already required by the middleman-aws gem, it appears middleman does not
-    #   pick up transitive dependency extensions early enough  to avoid the
-    #   "== Unknown Extension:" error.  Add these to your main project
-    #   (I wish this was unnecessary but don't know how to work around it)
-    gem 'middleman-s3_sync'
-    gem 'middleman-cloudfront'
-
 
 ### Step 3: AWS credentials
 
@@ -41,34 +41,16 @@ If you don't create secrets file, then environment variables `AWS_ACCESS_KEY_ID`
 If a secrets file is not present (option 1), there are no ENV variables (option 2), then request to AWS will fail (unless middleman-aws is used on EC2 instance with correct IAM role, then AWS will take care of authorising requests).
 
 ### Step 4: Add the necessary s3_sync and Cloudfront sections to your config
-This is a sample of how a common config is setup with variables extracted:
+See the [sample config.rb](samples/config.rb) for full configuration. Be sure to set the following variables:
 
 ```ruby
+#------------------------------------------------------------------------
 # Configuration variables specific to each project
 #------------------------------------------------------------------------
+SITE_NAME                       = 'AlienFast Acme'
+URL_ROOT                        = 'http://acme.alienfast.com'
 AWS_BUCKET                      = 'acme.alienfast.com'
-AWS_CLOUDFRONT_DISTRIBUTION_ID  = 'xxxxxx'
-
-# Variables: Sent in on CLI by rake task via ENV
-#------------------------------------------------------------------------
-AWS_ACCESS_KEY                  = ENV['AWS_ACCESS_KEY']
-AWS_SECRET                      = ENV['AWS_SECRET']
-
-# https://github.com/fredjean/middleman-s3_sync
-activate :s3_sync do |s3_sync|
-  s3_sync.bucket                     = AWS_BUCKET # The name of the S3 bucket you are targeting. This is globally unique.
-  s3_sync.aws_access_key_id          = AWS_ACCESS_KEY
-  s3_sync.aws_secret_access_key      = AWS_SECRET
-  s3_sync.delete                     = false # We delete stray files by default.
-end
-
-# https://github.com/andrusha/middleman-cloudfront
-activate :cloudfront do |cf|
-  cf.access_key_id                    = AWS_ACCESS_KEY
-  cf.secret_access_key                = AWS_SECRET
-  cf.distribution_id                  = AWS_CLOUDFRONT_DISTRIBUTION_ID
-  # cf.filter = /\.html$/i
-end
+AWS_CLOUDFRONT_DISTRIBUTION_ID  = 'xxxxxxxxxxxx'
 ```
 
 # Usage
@@ -80,13 +62,13 @@ See the available rake tasks below or run `rake -T`
     rake mm:build        # Compile all files in the build directory
     rake mm:clobber      # Remove all files in the build direcory
     rake mm:deploy       # Deploy to S3 and invalidate Cloudfront after a Git commit/push
-    rake mm:preview      # Run the preview server at http://localhost:4567
+    rake mm:serve        # Run the preview server at http://localhost:4567
     rake mm:publish      # One step clobber, build, deploy
     rake mm:show_config  # Show config
 
 # Real World Sample
 If you are just getting started with middleman and want to get a quick jumpstart on your `Gemfile` and `congfig.rb`,
-check out the source in the `samples` directory for a set of commonly used configurations/gems/extensions.
+check out the source in the `samples` directory.
 
 ## Contributing
 1. Fork it
@@ -97,4 +79,4 @@ check out the source in the `samples` directory for a set of commonly used confi
 
 ## Copyright
 
-Copyright (c) 2014 AlienFast, LLC. See MIT LICENSE.txt for further details.
+Copyright (c) 2016 AlienFast, LLC. See MIT LICENSE.txt for further details.
